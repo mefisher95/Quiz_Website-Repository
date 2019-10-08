@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block head %}
+    <h1>Multiple Choice Question</h1>
+{% endblock %}
+{% block content %}
+Question {{ num }} <br><br>
+{{ gen_str }} <br>
+    <form action="" method=POST>
+        <input type="radio" name="answer" value=0> {{ answer[0] }}
+        <input type="radio" name="answer" value=1> {{ answer[1] }}
+        <input type="radio" name="answer" value=2> {{ answer[2] }}
+        <input type="radio" name="answer" value=3> {{ answer[3] }}
+
+        <input type="submit" value="Go">
+        <hr>
+    </form>
+
+{% endblock %}
