@@ -1,0 +1,19 @@
+<html>
+    <style>
+        h1 {
+            background-color: #00004d;
+            color: white;
+        }
+    </style>
+    <head>
+        {% block head %}
+        {% endblock %}
+    </head>
+    <body style="background-color:white;">
+
+        <a href='/logout'>Logout</a><br>
+        {% block content %}
+        {% endblock %}
+    </body>
+
+</html>
