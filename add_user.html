@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block head %}
+        <h1>Student Roster</h1>
+{% endblock %}
+{% block content %}
+        <style>
+            tfd {
+                text-align: right;
+            }
+        </style>
+        <form action="" method='POST'>
+            <label for="new_user_id"><b>Register Student: </b></label><br><br><input type="text" name="new_user_id" placeholder="Student ID"><br>
+            <input type="text" name="new_user_first_name" placeholder="First name"><br>
+            <input type="text" name="new_user_last_name" placeholder="Last name"><br>
+            <input type="text" name="new_user_name" placeholder="USERNAME"><br>
+            <input type="password" name="new_user_password" placeholder="NEW PASSWORD"><br><br>
+
+            Enrolled Class: <br>
+            <input type="checkbox" name="240"> 240 <br>
+            <input type="checkbox" name="245"> 245 <br>
+            <input type="checkbox" name="350"> 350 <br>
+            <hr>
+            Admin Login<br>
+            <input type="text" name="admin_user_name" placeholder="Username"><br>
+            <input type="password" name="admin_password" placeholder="Password"><br>
+             {% if error != None %}
+            <font color = 'red'>{{ error }}</font><br>
+            {% else %}
+            <br>
+            {% endif %}
+            <input type="submit" value="Add user">
+        </form>
+        <hr>
+        <b>All the users with respective class</b>
+        <table border = 1>
+            <tr>
+                <th>Student ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Class Enrolled in</th>
+                <th>Edits</th>
+            </tr>
+            {% for data_dict in dict_list_class %}
+                <tr>
+                    <td align = "right">{{ data_dict['user_id'] }}</td>
+                    <td align = "right">{{ data_dict['fname'] }}</td>
+                    <td align = "right">{{ data_dict['lname'] }}</td>
+                    <td align = "right">{{ data_dict['user_class'] }}</td>
+                    <td align = "left"> <a href = '{{ url_for('remove_user_from_class', user_id=data_dict['user_id'], user_class=data_dict['user_class']) }}'>Remove from this class</a>
+                </tr>
+
+            {% endfor %}
+        </table>
+        <hr>
+        <b>All the users</b>
+        <table border = 1>
+            <tr>
+                <th>Student ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Edits</th>
+            </tr>
+            {% for data_dict in dict_list_all %}
+                <tr>
+                    <td align = "right">{{ data_dict['user_id'] }}</td>
+                    <td align = "right">{{ data_dict['fname'] }}</td>
+                    <td align = "right">{{ data_dict['lname'] }}</td>
+                    <td align = "left"> <a href='{{ url_for('remove_user_from_all_the_classes', user_id=data_dict['user_id']) }}'>Remove User</a></td>
+                </tr>
+
+            {% endfor %}
+        </table>
+{% endblock %}
