@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block head %}
+    <h1>Login</h1>
+
+{% endblock %}
+{% block content %}
+    <form action="" method='POST'>
+        <input type = "text" name="user_name" placeholder="Username"> <br> <br>
+        <input type = "password" name="user_password" placeholder="Password"> <br> <br>
+
+        {% if error != None %}
+            <font color = 'red'>{{ error }}</font><br>
+        {% else %}
+            <br>
+        {% endif %}
+
+        <input type="submit" value="Login">
+        <br><br><br>
+        {% if g.user != None%}
+            Already logged in!
+            {% if g.user == "Admin"%}
+            <a href='{{url_for('home_admin')}}'>HOME</a><br>
+            {% endif %}
+
+            {% if g.user != None and g.user != "Admin"%}
+            <a href='{{url_for('home_student')}}'>HOME</a><br>
+            {% endif %}
+        {% endif %}
+
+    </form>
+
+{% endblock %}
