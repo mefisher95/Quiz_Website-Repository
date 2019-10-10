@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block head %}
+        <h1>Question Template Manager</h1>
+{% endblock %}
+{% block content %}
+        <style>
+            tfd {
+                text-align: right;
+            }
+        </style>
+        <form action="" method='POST'>
+            <strong>Create Question Template</strong> <br><br>
+            Class and Section: <br>
+            <input type="radio" name="user_class" value = 240 checked> 240
+            <input type="radio" name="user_class" value = 245> 245
+            <input type="radio" name="user_class" value = 350> 350
+            <input type="text" name="quiz_section" placeholder="Section" size=3> <br> <br> <br>
+
+            Question Type: <br>
+            <select name="quest_type">
+              <option value="1">Multiple Choice</option>
+              <option value="2">Fill in the Blank</option>
+              <option value="3">Programming</option>
+            </select>
+            <br> <br>
+            Question Parameters <br>
+            <input type="text" name="quest_str" placeholder="Question" size=15>
+            <input type="text" name="quest_answer" placeholder="Answer" size=15>
+            <input type="text" name="quest_param" placeholder="Fields Dictionary" size=15>
+            <input type="text" name="quest_points" placeholder="Point Value" size=15>
+            <input type="text" name="quest_options" placeholder="List of Options [...]" size=30> (Leave this blank except for MCQ)<br>
+            <br><br>
+
+            <input type="submit" value="Submit"> <br>
+             {% if error != None %}
+            <font color = 'red'>{{ error }}</font><br>
+            {% else %}
+            <br>
+            {% endif %}
+
+        </form>
+        <hr>
+
+        <table border = 1>
+            <tr>
+                <th>Quiz ID</th>
+                <th>Type</th>
+                <th>Question</th>
+                <th>Answer</th>
+                <th>Options</th>
+                <th>Field Dictionary</th>
+                <th>Points</th>
+                <th>Edit</th>
+            </tr>
+            {% for element in quiz_question_list %}
+                <tr>
+                    <td align = "right">{{ element['quiz_id'] }}</td>
+                    <td align = "right">{{ element['quest_type']}}</td>
+                    <td align = "right">{{ element['quest_str'] }}</td>
+                    <td align = "right">{{ element['quest_ans'] }}</td>
+                    <td align = "right">{{ element['quest_options'] }}</td>
+                    <td align = "right">{{ element['quest_param'] }}</td>
+                    <td align = "right">{{ element['quest_point'] }}</td>
+                    <td align = "right"> <a href = '{{ url_for('remove_question', quest_id=element['quest_id']) }}'>Delete</a></td>
+                </tr>
+
+            {% endfor %}
+        </table>
+        <hr>
+        <table border = 1>
+            <tr>
+                <th>Quiz ID</th>
+                <th>Quiz Class</th>
+                <th>Quiz Week</th>
+                <th>Edit</th>
+            </tr>
+            {% for element in quiz_list %}
+                <tr>
+                    <td align = "right">{{ element['quiz_id'] }}</td>
+                    <td align = "right">{{ element['quiz_class'] }}</td>
+                    <td align = "right">{{ element['quiz_week'] }}</td>
+                    <td align = "right"> <a href = '{{ url_for('remove_quiz', quiz_id=element['quiz_id']) }}'>Delete</a></td>
+                </tr>
+
+            {% endfor %}
+        </table>
+{% endblock %}
